@@ -19,6 +19,7 @@ class CustomListTile extends StatelessWidget {
       children: [
         
         ListTile(
+          // contentPadding: EdgeInsets.zero,
           minTileHeight: 40,
           selectedTileColor: Colors.grey.withOpacity(0.2),
           // contentPadding: EdgeInsets.all(8),

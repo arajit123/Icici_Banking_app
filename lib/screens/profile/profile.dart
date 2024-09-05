@@ -1,3 +1,4 @@
+import 'package:banking_app/common_widgets/common_appbar.dart';
 import 'package:banking_app/constant/font_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,41 +10,42 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: const CommonAppbar(text: 'Me'),
         body: Column(
           children: [
-            Container(
-              height: 55.h,
-              decoration: const BoxDecoration(color: Color(0xFFf6711d)),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(8.w), // Use .w for padding scaling
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                        size: 23,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 120.w,
-                  ), // Automatically adjust space to center the text
-                  Center(
-                    child: Text(
-                      'Me',
-                      style: IciciBankFontTheme.textTheme.bodySmall!
-                          .copyWith(color: Colors.white, fontSize: 22.sp),
-                    ),
-                  ),
-                  const Spacer(), // Add Spacer to push text to the center
-                ],
-              ),
-            ),
+            // Container(
+            //   height: 60.h,
+            //   decoration: const BoxDecoration(color: Color(0xFFf6711d)),
+            //   child: Row(
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: [
+            //       Padding(
+            //         padding: EdgeInsets.all(8.w), // Use .w for padding scaling
+            //         child: GestureDetector(
+            //           onTap: () {
+            //             Navigator.pop(context);
+            //           },
+            //           child: const Icon(
+            //             Icons.arrow_back_ios,
+            //             color: Colors.white,
+            //             size: 23,
+            //           ),
+            //         ),
+            //       ),
+            //       SizedBox(
+            //         width: 120.w,
+            //       ), // Automatically adjust space to center the text
+            //       Center(
+            //         child: Text(
+            //           'Me',
+            //           style: IciciBankFontTheme.textTheme.bodySmall!
+            //               .copyWith(color: Colors.white, fontSize: 22.sp),
+            //         ),
+            //       ),
+            //       const Spacer(), // Add Spacer to push text to the center
+            //     ],
+            //   ),
+            // ),
             Expanded(
               child: ListView(
                 // physics:BouncingScrollPhysics(),
