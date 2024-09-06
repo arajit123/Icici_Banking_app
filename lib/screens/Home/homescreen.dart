@@ -68,6 +68,7 @@ class _HomescreenState extends State<Homescreen>
         ),),
             key: _sliderDrawerKey,
             sliderOpenSize: 205,
+            
             slider: SliderView(
               onItemClick: (title) {
                 _sliderDrawerKey.currentState!.closeSlider();

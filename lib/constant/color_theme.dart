@@ -8,7 +8,9 @@ class IciciBankTheme {
   static const Color textColor = Color(0xFF333333); // Dark Gray Text
   static const Color secondaryTextColor = Color(0xFF666666); // Light Gray Text
   static const Color lightGray = Color(0xFFE0E0E0); // Light Gray
-  static const Color darkGray = Color(0xFF444444); // Dark Gray
+  static const Color darkGray = Color(0xFF444444);
+  static const Color blueTextColor = Color.fromARGB(255, 4, 84, 154);
+   // Dark Gray
 
   static ThemeData themeData(BuildContext context) {
     return ThemeData(

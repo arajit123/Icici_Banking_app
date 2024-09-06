@@ -1,6 +1,7 @@
 import 'package:banking_app/constant/font_theme.dart';
 import 'package:banking_app/screens/favourite/favourite_screen.dart';
 import 'package:banking_app/screens/profile/profile.dart';
+import 'package:banking_app/screens/services/services_page.dart';
 import 'package:banking_app/screens/track_application/track_application.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,21 +80,27 @@ class BottomNavItemOfHome extends StatelessWidget {
             ],
           ),
         ),
-        Column(
-          children: [
-            Image.asset(
-              'assets/icons/bulb.png',
-              height: 27.h,
-              width: 27.w,
-            ),
-            Text(
-              'Services',
-              style: IciciBankFontTheme.textTheme.labelSmall!.copyWith(
-                  fontSize: 9,
-                  color: Colors.black54,
-                  fontWeight: FontWeight.bold),
-            )
-          ],
+        GestureDetector(
+          onTap: () {
+             Navigator.push(context,
+                MaterialPageRoute(builder: (context) =>  const ServicesPage()));
+          },
+          child: Column(
+            children: [
+              Image.asset(
+                'assets/icons/bulb.png',
+                height: 27.h,
+                width: 27.w,
+              ),
+              Text(
+                'Services',
+                style: IciciBankFontTheme.textTheme.labelSmall!.copyWith(
+                    fontSize: 9,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
         ),
       ],
     );
