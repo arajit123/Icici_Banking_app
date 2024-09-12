@@ -35,7 +35,7 @@ class _MainContentState extends State<MainContent>
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:  EdgeInsets.symmetric(horizontal:8.dg),
           child: SizedBox(
             height: 173.h,
             width: double.infinity,
@@ -88,11 +88,11 @@ class _MainContentState extends State<MainContent>
                       ),
                       SizedBox(height: 10.h),
                       Container(
-                        height: 35,
-                        width: 120,
+                        height: 35.h,
+                        width: 120.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25.r),
-                          border: Border.all(color: Colors.white, width: 1),
+                          border: Border.all(color: Colors.white, width: 1.w),
                         ),
                         child: Center(
                           child: Text(

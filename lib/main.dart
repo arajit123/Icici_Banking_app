@@ -15,11 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 784), // Design size based on target device screen size
+      designSize: const Size(360.0,784.0), // Design size based on target device screen size
       minTextAdapt: true, // To make text scale based on screen size
       splitScreenMode: true, // Enable split-screen mode adaptability
       builder: (context, child) {
-        // Print screen size and height using MediaQuery and ScreenUtil
+        // Print screen size and height usinga MediaQuery and ScreenUtil
         // print("Screen width: ${ScreenUtil().screenWidth} dp");
         // print("Screen height: ${ScreenUtil().screenHeight} dp");
         // print("MediaQuery height: ${MediaQuery.of(context).size.height} dp");

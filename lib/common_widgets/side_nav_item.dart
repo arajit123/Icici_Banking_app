@@ -1,5 +1,6 @@
-import 'package:banking_app/Chnage_login_pin/change_login_pin.dart';
+import 'package:banking_app/screens/Chnage_login_pin/change_login_pin.dart';
 import 'package:banking_app/common_widgets/custom_list_tile.dart';
+import 'package:banking_app/screens/App_Permission/app_permission.dart';
 import 'package:banking_app/screens/calculator/calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -85,7 +86,12 @@ class SliderView extends StatelessWidget {
           CustomListTile(
             text: 'App Permissions',
             icon: Icons.settings_applications_outlined,
-            onTap: () {},
+            onTap: () {
+               Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AppPermissionPage()));
+            },
           ),
           CustomListTile(
             text: 'Rate Us',
