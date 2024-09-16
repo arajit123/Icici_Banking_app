@@ -11,14 +11,14 @@ class DigitalSavingsAccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CommonAppbar(text: 'Open New Account'),
+        appBar: const CommonAppbar(text: 'Open New Account'),
         body: Column(
           children: [
             SizedBox(height: 15.h,),
             Text("Hi, there!",style: IciciBankFontTheme.textTheme.headlineSmall!.copyWith(
               color: IciciBankTheme.accentColor
             ),),
-            Text("Let's get you started",style: IciciBankFontTheme.textTheme.headlineSmall!.copyWith(
+            Text("Let's get you started",style: IciciBankFontTheme.textTheme.labelMedium!.copyWith(
               color: IciciBankTheme.blueTextColor
             ),),
             SizedBox(height: 20.h,),
@@ -44,19 +44,28 @@ class DigitalSavingsAccountPage extends StatelessWidget {
                         Container(
                           height: 70.h,
                           width: 70.w,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: IciciBankTheme.lightGray,
                             shape: BoxShape.circle
                           ),
                           child: Image.asset('assets/icons/ss.png',height: 30.h,width: 30.w,color: IciciBankTheme.accentColor,)),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Open Savings Account Instantly'),
-                            Text('Get an instant account in 4 minutes\n and start transacting digitally.'),
-                            Text('Debit Card and Cheque Book will follow')
-                          ],
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 3.w,vertical: 2.h),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Open Savings Account Instantly',style: IciciBankFontTheme.textTheme.bodyLarge!.copyWith(
+                                color: IciciBankTheme.blueTextColor
+                              ),),
+                              Text('Get an instant account in 4 minutes\n and start transacting digitally.',style: IciciBankFontTheme.textTheme.labelMedium!.copyWith(
+                                color: IciciBankTheme.blueTextColor
+                              ),),
+                              Text('Debit Card and Cheque Book will follow',style: IciciBankFontTheme.textTheme.labelSmall!.copyWith(
+                                color: IciciBankTheme.darkGray
+                              ),)
+                            ],
+                          ),
                         )
                       ],
                     ),

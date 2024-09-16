@@ -1,7 +1,10 @@
 import 'package:banking_app/constant/font_theme.dart';
 import 'package:banking_app/screens/Bill%20payment%20&%20rechange/bill_payment_recharge_page.dart';
+import 'package:banking_app/screens/Loans/loans.dart';
 import 'package:banking_app/screens/My_cards/my_cards.dart';
+import 'package:banking_app/screens/convert%20emi/convert_emi.dart';
 import 'package:banking_app/screens/digital%20savings%20account/savings_account.dart';
+import 'package:banking_app/screens/offers%20rewards/offersrewards.dart';
 import 'package:banking_app/screens/recharge/recharge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -247,91 +250,106 @@ class ItemOfHome extends StatelessWidget {
                       )),
                 ]),
               ),
-              customContainerView('assets/icons/hand.png', 'iFinance'),
-              Container(
-                decoration: BoxDecoration(
-                    // color: Colors.red,
-                    borderRadius: BorderRadius.circular(20),
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Colors.pink.shade100.withOpacity(0.3),
-                          Colors.pink.shade100.withOpacity(0.2),
-                          Colors.pink.shade100.withOpacity(0.1),
-                          Colors.pink.shade100.withOpacity(0.05),
-                          Colors.deepPurple.shade100.withOpacity(0.05),
-                          Colors.deepPurple.shade100.withOpacity(0.1),
-                          Colors.deepPurple.shade100.withOpacity(0.2),
-                          Colors.deepPurple.shade100.withOpacity(0.3),
-                        ])),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/calendar.png',
-                      height: 28.h,
-                      width: 28.w,
-                      // color: const Color(0xFFf6711d),
-                    ),
-                    SizedBox(
-                      height: 9.h,
-                    ),
-                    Text('Convert to',
-                        style: IciciBankFontTheme.textTheme.labelSmall!
-                            .copyWith(color: Colors.black54)),
-                    Text('EMI',
-                        style: IciciBankFontTheme.textTheme.labelSmall!
-                            .copyWith(color: Colors.black54))
-                  ],
+              customContainerView('assets/icons/hand.png', 'iFinance',(){}),
+              GestureDetector(
+                onTap: () {
+                   Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const ConvertEmi()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      // color: Colors.red,
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Colors.pink.shade100.withOpacity(0.3),
+                            Colors.pink.shade100.withOpacity(0.2),
+                            Colors.pink.shade100.withOpacity(0.1),
+                            Colors.pink.shade100.withOpacity(0.05),
+                            Colors.deepPurple.shade100.withOpacity(0.05),
+                            Colors.deepPurple.shade100.withOpacity(0.1),
+                            Colors.deepPurple.shade100.withOpacity(0.2),
+                            Colors.deepPurple.shade100.withOpacity(0.3),
+                          ])),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/calendar.png',
+                        height: 28.h,
+                        width: 28.w,
+                        // color: const Color(0xFFf6711d),
+                      ),
+                      SizedBox(
+                        height: 9.h,
+                      ),
+                      Text('Convert to',
+                          style: IciciBankFontTheme.textTheme.labelSmall!
+                              .copyWith(color: Colors.black54)),
+                      Text('EMI',
+                          style: IciciBankFontTheme.textTheme.labelSmall!
+                              .copyWith(color: Colors.black54))
+                    ],
+                  ),
                 ),
               ),
-              customContainerView('assets/icons/money-bag.png', 'Loans'),
+              customContainerView('assets/icons/money-bag.png', 'Loans',(){
+                 Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const LoansPage()));
+              }),
               customContainerView(
-                  'assets/icons/payment-check.png', 'Upgrade Card'),
-              customContainerView('assets/icons/gift.png', 'Offers'),
+                  'assets/icons/payment-check.png', 'Upgrade Card',(){}),
+              customContainerView('assets/icons/gift.png', 'Offers',(){
+                 Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const OffersRewardsPage()));
+              }),
               // Divider()
             ]),
       ),
     );
   }
 
-  Widget customContainerView(String image, String labelText) {
-    return Container(
-      decoration: BoxDecoration(
-          // color: Colors.red,
-          borderRadius: BorderRadius.circular(20),
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Colors.pink.shade100.withOpacity(0.3),
-                Colors.pink.shade100.withOpacity(0.2),
-                Colors.pink.shade100.withOpacity(0.1),
-                Colors.pink.shade100.withOpacity(0.05),
-                Colors.deepPurple.shade100.withOpacity(0.05),
-                Colors.deepPurple.shade100.withOpacity(0.1),
-                Colors.deepPurple.shade100.withOpacity(0.2),
-                Colors.deepPurple.shade100.withOpacity(0.3),
-              ])),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset(
-            image,
-            height: 30.h,
-            width: 30.w,
-            // color: const Color(0xFFf6711d),
-          ),
-          SizedBox(
-            height: 9.h,
-          ),
-          Text(labelText,
-              style: IciciBankFontTheme.textTheme.labelSmall!
-                  .copyWith(color: Colors.black54))
-        ],
+  Widget customContainerView(String image, String labelText,VoidCallback ontap) {
+    return GestureDetector(
+      onTap:ontap ,
+      child: Container(
+        decoration: BoxDecoration(
+            // color: Colors.red,
+            borderRadius: BorderRadius.circular(20),
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.pink.shade100.withOpacity(0.3),
+                  Colors.pink.shade100.withOpacity(0.2),
+                  Colors.pink.shade100.withOpacity(0.1),
+                  Colors.pink.shade100.withOpacity(0.05),
+                  Colors.deepPurple.shade100.withOpacity(0.05),
+                  Colors.deepPurple.shade100.withOpacity(0.1),
+                  Colors.deepPurple.shade100.withOpacity(0.2),
+                  Colors.deepPurple.shade100.withOpacity(0.3),
+                ])),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              image,
+              height: 30.h,
+              width: 30.w,
+              // color: const Color(0xFFf6711d),
+            ),
+            SizedBox(
+              height: 9.h,
+            ),
+            Text(labelText,
+                style: IciciBankFontTheme.textTheme.labelSmall!
+                    .copyWith(color: Colors.black54))
+          ],
+        ),
       ),
     );
   }
