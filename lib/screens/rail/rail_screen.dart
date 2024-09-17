@@ -1,20 +1,19 @@
 import 'package:banking_app/common_widgets/common_appbar.dart';
 import 'package:banking_app/constant/color_theme.dart';
-import 'package:banking_app/screens/offers%20rewards/widgets/itemofoffer/itemofoffers.dart';
-import 'package:banking_app/screens/offers%20rewards/widgets/itemofpreapprovedloan.dart';
-import 'package:banking_app/screens/offers%20rewards/widgets/itemofrewards.dart';
+import 'package:banking_app/screens/rail/widgets/itemofbooktickets.dart';
+import 'package:banking_app/screens/rail/widgets/itemofcheckpnr.dart';
+import 'package:banking_app/screens/rail/widgets/itemofmybooking.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OffersRewardsPage extends StatefulWidget {
-  const OffersRewardsPage({super.key});
+class RailScreen extends StatefulWidget {
+  const RailScreen({super.key});
 
   @override
-  State<OffersRewardsPage> createState() => _OffersRewardsPageState();
+  State<RailScreen> createState() => _RailScreenState();
 }
 
-class _OffersRewardsPageState extends State<OffersRewardsPage>
-    with SingleTickerProviderStateMixin {
+class _RailScreenState extends State<RailScreen>with SingleTickerProviderStateMixin {
   late TabController _tabController;
   // Track the selected tab index
 
@@ -29,43 +28,50 @@ class _OffersRewardsPageState extends State<OffersRewardsPage>
     _tabController.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white.withOpacity(0.9),
-        appBar: CommonAppbar(text: 'Offers and Rewards'),
+        appBar:CommonAppbar(text: 'Rail Ticketing'),
         body: Column(
           children: [
             Container(
               height: 55.h,
               width: double.infinity,
-              color: Colors.white,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 5,
+                      offset: Offset(0, 2)
+                    )
+                  ]
+              ),
+              
               child: TabBar(
                 // isScrollable: true,
                 controller: _tabController,
                 labelStyle: TextStyle(
-                  fontSize: 13.sp,
+                  fontSize: 15.sp,
                   fontWeight: FontWeight
                       .bold, // Set font weight to bold for the active tab
                 ),
                 unselectedLabelStyle: TextStyle(
-                  fontSize: 13.sp,
+                  fontSize: 15.sp,
                   fontWeight: FontWeight
                       .normal, // Set font weight to normal for inactive tabs
                 ),
-                labelColor: IciciBankTheme.blueTextColor,
-                unselectedLabelColor: IciciBankTheme
-                    .blueTextColor, // Different color for unselected labels
+                labelColor: IciciBankTheme.accentColor,
+                unselectedLabelColor: Colors.grey, // Different color for unselected labels
                 indicatorSize: TabBarIndicatorSize.tab,
-                indicatorColor: IciciBankTheme.blueTextColor,
+                indicatorColor: IciciBankTheme.accentColor,
                 tabs: const [
                   FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Tab(text: 'Pre-Approved Loans')),
-                  FittedBox(fit: BoxFit.scaleDown, child: Tab(text: 'Offers')),
-                  FittedBox(fit: BoxFit.scaleDown, child: Tab(text: 'Rewards')),
+                      // fit: BoxFit.scaleDown,
+                      child: Tab(text: 'Book Tickets')),
+                  FittedBox(fit: BoxFit.scaleDown, child: Tab(text: 'Check PNR')),
+                  FittedBox(fit: BoxFit.scaleDown, child: Tab(text: 'My Bookings')),
                 ],
               ),
             ),
@@ -73,9 +79,9 @@ class _OffersRewardsPageState extends State<OffersRewardsPage>
               child: TabBarView(
                 controller: _tabController,
                 children: const [
-                  ItemOfPreApprovedLoanPage(),
-                 ItemofoffersPage(),
-                  ItemofrewardsPage()
+                  ItemofbookticketsPage(),
+                  ItemofcheckpnrPage(),
+                  ItemofmybookingPage()
                 ],
               ),
             ),

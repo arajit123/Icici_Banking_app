@@ -87,7 +87,8 @@ class SliderView extends StatelessWidget {
             text: 'App Permissions',
             icon: Icons.settings_applications_outlined,
             onTap: () {
-               Navigator.push(
+              Navigator.pop(context);
+              Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const AppPermissionPage()));
