@@ -1,4 +1,8 @@
 import 'package:banking_app/constant/font_theme.dart';
+import 'package:banking_app/screens/Flights/flights.dart';
+import 'package:banking_app/screens/bus/bus.dart';
+import 'package:banking_app/screens/giftcard/gift_card.dart';
+import 'package:banking_app/screens/hotels/hotels.dart';
 import 'package:banking_app/screens/rail/rail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +27,7 @@ class ItemOfShop extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => RailScreen()));
+                      MaterialPageRoute(builder: (context) => const RailScreen()));
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -62,112 +66,130 @@ class ItemOfShop extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                    // color: Colors.red,
-                    borderRadius: BorderRadius.circular(20),
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Colors.pink.shade100.withOpacity(0.3),
-                          Colors.pink.shade100.withOpacity(0.2),
-                          Colors.pink.shade100.withOpacity(0.1),
-                          Colors.pink.shade100.withOpacity(0.05),
-                          Colors.deepPurple.shade100.withOpacity(0.05),
-                          Colors.deepPurple.shade100.withOpacity(0.1),
-                          Colors.deepPurple.shade100.withOpacity(0.2),
-                          Colors.deepPurple.shade100.withOpacity(0.3),
-                        ])),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/hotel.png',
-                      height: 30.h,
-                      width: 30.w,
-                      // color: const Color(0xFFf6711d),
-                    ),
-                    SizedBox(
-                      height: 9.h,
-                    ),
-                    Text('Hotels',
-                        style: IciciBankFontTheme.textTheme.labelSmall!
-                            .copyWith(color: Colors.black54)),
-                  ],
+              GestureDetector(
+                onTap: () {
+                   Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const HotelsPage()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      // color: Colors.red,
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Colors.pink.shade100.withOpacity(0.3),
+                            Colors.pink.shade100.withOpacity(0.2),
+                            Colors.pink.shade100.withOpacity(0.1),
+                            Colors.pink.shade100.withOpacity(0.05),
+                            Colors.deepPurple.shade100.withOpacity(0.05),
+                            Colors.deepPurple.shade100.withOpacity(0.1),
+                            Colors.deepPurple.shade100.withOpacity(0.2),
+                            Colors.deepPurple.shade100.withOpacity(0.3),
+                          ])),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/hotel.png',
+                        height: 30.h,
+                        width: 30.w,
+                        // color: const Color(0xFFf6711d),
+                      ),
+                      SizedBox(
+                        height: 9.h,
+                      ),
+                      Text('Hotels',
+                          style: IciciBankFontTheme.textTheme.labelSmall!
+                              .copyWith(color: Colors.black54)),
+                    ],
+                  ),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                    // color: Colors.red,
-                    borderRadius: BorderRadius.circular(20),
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Colors.pink.shade100.withOpacity(0.3),
-                          Colors.pink.shade100.withOpacity(0.2),
-                          Colors.pink.shade100.withOpacity(0.1),
-                          Colors.pink.shade100.withOpacity(0.05),
-                          Colors.deepPurple.shade100.withOpacity(0.05),
-                          Colors.deepPurple.shade100.withOpacity(0.1),
-                          Colors.deepPurple.shade100.withOpacity(0.2),
-                          Colors.deepPurple.shade100.withOpacity(0.3),
-                        ])),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/airplane.png',
-                      height: 30.h,
-                      width: 30.w,
-                      // color: const Color(0xFFf6711d),
-                    ),
-                    SizedBox(
-                      height: 9.h,
-                    ),
-                    Text('Flight',
-                        style: IciciBankFontTheme.textTheme.labelSmall!
-                            .copyWith(color: Colors.black54))
-                  ],
+              GestureDetector(
+                onTap: () {
+                   Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const FlightsPage()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      // color: Colors.red,
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Colors.pink.shade100.withOpacity(0.3),
+                            Colors.pink.shade100.withOpacity(0.2),
+                            Colors.pink.shade100.withOpacity(0.1),
+                            Colors.pink.shade100.withOpacity(0.05),
+                            Colors.deepPurple.shade100.withOpacity(0.05),
+                            Colors.deepPurple.shade100.withOpacity(0.1),
+                            Colors.deepPurple.shade100.withOpacity(0.2),
+                            Colors.deepPurple.shade100.withOpacity(0.3),
+                          ])),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/airplane.png',
+                        height: 30.h,
+                        width: 30.w,
+                        // color: const Color(0xFFf6711d),
+                      ),
+                      SizedBox(
+                        height: 9.h,
+                      ),
+                      Text('Flight',
+                          style: IciciBankFontTheme.textTheme.labelSmall!
+                              .copyWith(color: Colors.black54))
+                    ],
+                  ),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                    // color: Colors.red,
-                    borderRadius: BorderRadius.circular(20),
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Colors.pink.shade100.withOpacity(0.3),
-                          Colors.pink.shade100.withOpacity(0.2),
-                          Colors.pink.shade100.withOpacity(0.1),
-                          Colors.pink.shade100.withOpacity(0.05),
-                          Colors.deepPurple.shade100.withOpacity(0.05),
-                          Colors.deepPurple.shade100.withOpacity(0.1),
-                          Colors.deepPurple.shade100.withOpacity(0.2),
-                          Colors.deepPurple.shade100.withOpacity(0.3),
-                        ])),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/bus.png',
-                      height: 30.h,
-                      width: 30.w,
-                      // color: const Color(0xFFf6711d),
-                    ),
-                    SizedBox(
-                      height: 9.h,
-                    ),
-                    Text('Bus',
-                        style: IciciBankFontTheme.textTheme.labelSmall!
-                            .copyWith(color: Colors.black54)),
-                  ],
+              GestureDetector(
+                onTap: () {
+                   Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const BusPage()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      // color: Colors.red,
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Colors.pink.shade100.withOpacity(0.3),
+                            Colors.pink.shade100.withOpacity(0.2),
+                            Colors.pink.shade100.withOpacity(0.1),
+                            Colors.pink.shade100.withOpacity(0.05),
+                            Colors.deepPurple.shade100.withOpacity(0.05),
+                            Colors.deepPurple.shade100.withOpacity(0.1),
+                            Colors.deepPurple.shade100.withOpacity(0.2),
+                            Colors.deepPurple.shade100.withOpacity(0.3),
+                          ])),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/bus.png',
+                        height: 30.h,
+                        width: 30.w,
+                        // color: const Color(0xFFf6711d),
+                      ),
+                      SizedBox(
+                        height: 9.h,
+                      ),
+                      Text('Bus',
+                          style: IciciBankFontTheme.textTheme.labelSmall!
+                              .copyWith(color: Colors.black54)),
+                    ],
+                  ),
                 ),
               ),
               Container(
@@ -209,51 +231,57 @@ class ItemOfShop extends StatelessWidget {
                   ],
                 ),
               ),
-              customContainerView('assets/icons/gift-card.png', 'E-Gift card'),
-              customContainerView('assets/icons/tap-to-pay.png', 'Tap To Pay'),
+              customContainerView('assets/icons/gift-card.png', 'E-Gift card',(){
+                Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const GiftCardPage()));
+              }),
+              customContainerView('assets/icons/tap-to-pay.png', 'Tap To Pay',(){}),
               customContainerView(
-                  'assets/icons/credit-card.png', 'Refer a Card'),
-              customContainerView('assets/icons/reward.png', 'My Rewards')
+                  'assets/icons/credit-card.png', 'Refer a Card',(){}),
+              customContainerView('assets/icons/reward.png', 'My Rewards',(){})
             ]),
       ),
     );
   }
 
-  Widget customContainerView(String image, String labelText) {
-    return Container(
-      decoration: BoxDecoration(
-          // color: Colors.red,
-          borderRadius: BorderRadius.circular(20),
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Colors.pink.shade100.withOpacity(0.3),
-                Colors.pink.shade100.withOpacity(0.2),
-                Colors.pink.shade100.withOpacity(0.1),
-                Colors.pink.shade100.withOpacity(0.05),
-                Colors.deepPurple.shade100.withOpacity(0.05),
-                Colors.deepPurple.shade100.withOpacity(0.1),
-                Colors.deepPurple.shade100.withOpacity(0.2),
-                Colors.deepPurple.shade100.withOpacity(0.3),
-              ])),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset(
-            image,
-            height: 30.h,
-            width: 30.w,
-            // color: const Color(0xFFf6711d),
-          ),
-          SizedBox(
-            height: 9.h,
-          ),
-          Text(labelText,
-              style: IciciBankFontTheme.textTheme.labelSmall!
-                  .copyWith(color: Colors.black54))
-        ],
+  Widget customContainerView(String image, String labelText,VoidCallback ontap) {
+    return GestureDetector(
+      onTap:ontap ,
+      child: Container(
+        decoration: BoxDecoration(
+            // color: Colors.red,
+            borderRadius: BorderRadius.circular(20),
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.pink.shade100.withOpacity(0.3),
+                  Colors.pink.shade100.withOpacity(0.2),
+                  Colors.pink.shade100.withOpacity(0.1),
+                  Colors.pink.shade100.withOpacity(0.05),
+                  Colors.deepPurple.shade100.withOpacity(0.05),
+                  Colors.deepPurple.shade100.withOpacity(0.1),
+                  Colors.deepPurple.shade100.withOpacity(0.2),
+                  Colors.deepPurple.shade100.withOpacity(0.3),
+                ])),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              image,
+              height: 30.h,
+              width: 30.w,
+              // color: const Color(0xFFf6711d),
+            ),
+            SizedBox(
+              height: 9.h,
+            ),
+            Text(labelText,
+                style: IciciBankFontTheme.textTheme.labelSmall!
+                    .copyWith(color: Colors.black54))
+          ],
+        ),
       ),
     );
   }
