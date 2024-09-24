@@ -12,6 +12,7 @@ class CustomTabbar extends StatefulWidget {
   final double height;
   final double width;
   final double borderRadius;
+  final double? tabheight;
 
   const CustomTabbar({
     super.key,
@@ -20,6 +21,7 @@ class CustomTabbar extends StatefulWidget {
     this.labelStyle,
     this.labelColor = Colors.white,
     this.unselectedLabelColor = Colors.black54,
+    this.tabheight,
     this.indicatorGradient = const LinearGradient(
       begin: Alignment.centerLeft,
       end: Alignment.centerRight,
@@ -91,7 +93,7 @@ class _CustomTabbarState extends State<CustomTabbar> with SingleTickerProviderSt
           ),
         ),
         SizedBox(
-    height: 628.h,                                         // You can make this customizable as well
+    height:widget.tabheight,                                         // You can make this customizable as well
           child: TabBarView(
             controller: _tabController,
             children: widget.tabViews,

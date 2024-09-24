@@ -32,13 +32,13 @@ class _RailScreenState extends State<RailScreen>with SingleTickerProviderStateMi
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar:CommonAppbar(text: 'Rail Ticketing'),
+        appBar:const CommonAppbar(text: 'Rail Ticketing'),
         body: Column(
           children: [
             Container(
               height: 55.h,
               width: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(

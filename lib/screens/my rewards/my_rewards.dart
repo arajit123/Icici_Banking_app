@@ -1,14 +1,19 @@
+import 'package:banking_app/common_widgets/common_appbar.dart';
 import 'package:banking_app/constant/color_theme.dart';
 import 'package:banking_app/constant/font_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ItemofrewardsPage extends StatelessWidget {
-  const ItemofrewardsPage({super.key});
+class MyRewardsPage extends StatelessWidget {
+  const MyRewardsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: IciciBankTheme.lightGray,
+        appBar: const CommonAppbar(text: 'My Rewards Point'),
+        body:  ListView(
       children: [
         Padding(
           padding: const EdgeInsets.all(12.0),
@@ -69,6 +74,8 @@ class ItemofrewardsPage extends StatelessWidget {
           ),
         )
       ],
+    ),
+      ),
     );
   }
 }

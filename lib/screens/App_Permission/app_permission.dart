@@ -19,7 +19,9 @@ class AppPermissionPage extends StatelessWidget {
         body: Column(
           children: [
             SizedBox(height: 20.h,),
-            CustomTabbar(labelStyle:  IciciBankFontTheme.textTheme.labelMedium,tabTitles: const ['Mandatory','Optional'], tabViews: const [
+            CustomTabbar(
+              tabheight: 628.h,
+              labelStyle:  IciciBankFontTheme.textTheme.labelMedium,tabTitles: const ['Mandatory','Optional'], tabViews: const [
               MandatoryItemPage(),OptionalItemPage(),
             ])
           ],
