@@ -1,7 +1,10 @@
 // import 'package:banking_app/constant/font_theme.dart';
 import 'package:banking_app/constant/color_theme.dart';
+import 'package:banking_app/extra/navigation_drawer.dart';
+import 'package:banking_app/screens/login%20screen/login_screen.dart';
 // import 'package:banking_app/extra/navigation_drawer.dart';
-import 'package:banking_app/screens/Home/homescreen.dart';
+// import 'package:banking_app/screens/Home/homescreen.dart';
+import 'package:banking_app/screens/splash%20screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // Importing screenutil package
 
@@ -29,7 +32,7 @@ class MyApp extends StatelessWidget {
           title: 'ICICI Bank Clone',
           debugShowCheckedModeBanner: false,
           theme: IciciBankTheme.themeData(context),
-          home:const Homescreen()
+          home: const SplashScreen()
         );
       },
     );

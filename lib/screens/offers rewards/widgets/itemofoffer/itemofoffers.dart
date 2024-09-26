@@ -48,64 +48,65 @@ class _ItemofoffersPageState extends State<ItemofoffersPage>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 5.h,),
+        SizedBox(
+          height: 5.h,
+        ),
         // Carousel Slider
-        CarouselSlider.builder(
-          itemCount: imageList.length,
-          carouselController: _controller,
-          itemBuilder: (context, index, realIdx) {
-            return Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 2.w),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(5.r)),
-                    child: Image.network(
-                      imageList[index],
-                      fit: BoxFit.fill, // Change to cover to ensure proper scaling
-                      width: double.infinity,
+        Stack(children: [
+          CarouselSlider.builder(
+            itemCount: imageList.length,
+            carouselController: _controller,
+            itemBuilder: (context, index, realIdx) {
+              return Container(
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 2.w),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5.r)),
+                  child: Image.network(
+                    imageList[index],
+                    fit:
+                        BoxFit.fill, // Change to cover to ensure proper scaling
+                    width: double.infinity,
+                  ),
+                ),
+              );
+            },
+            options: CarouselOptions(
+              height: 160.h,
+              autoPlay: true,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  current = index;
+                });
+              },
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: imageList.asMap().entries.map((entry) {
+                return GestureDetector(
+                  onTap: () => _controller.animateToPage(entry.key),
+                  child: Container(
+                    width: current == entry.key ? 12.0.w : 8.0.w,
+                    height: current == entry.key ? 12.0.h : 8.0.h,
+                    margin: EdgeInsets.symmetric(
+                        vertical: 8.0.h, horizontal: 4.0.w),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: current == entry.key
+                          ? Colors.white
+                          : Colors.grey.withOpacity(0.8),
                     ),
                   ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: imageList.asMap().entries.map((entry) {
-                      return GestureDetector(
-                        onTap: () => _controller.animateToPage(entry.key),
-                        child: Container(
-                          width: current == entry.key ? 12.0.w : 8.0.w,
-                          height: current == entry.key ? 12.0.h : 8.0.h,
-                          margin: EdgeInsets.symmetric(
-                              vertical: 8.0.h, horizontal: 4.0.w),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: current == entry.key
-                                ? Colors.white
-                                : Colors.grey.withOpacity(0.8),
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ],
-            );
-          },
-          options: CarouselOptions(
-            height: 160.h,
-            autoPlay: true,
-            onPageChanged: (index, reason) {
-              setState(() {
-                current = index;
-              });
-            },
+                );
+              }).toList(),
+            ),
           ),
-        ),
+        ]),
         Container(
           height: 80.h, // Increased height to accommodate the content
           width: double.infinity,
@@ -127,7 +128,6 @@ class _ItemofoffersPageState extends State<ItemofoffersPage>
             indicatorColor: Colors.transparent, // Remove default indicator
             tabs: [
               _buildTab(Icons.favorite_border, 'All Offers', 0),
-              
               _buildTab(Icons.credit_card, 'Cards', 1),
               _buildTab(Icons.shopping_bag_outlined, 'Shopping', 2),
               _buildTab(Icons.flight_takeoff_rounded, 'Travel', 3),
@@ -144,10 +144,10 @@ class _ItemofoffersPageState extends State<ItemofoffersPage>
           child: TabBarView(
             controller: _tabController,
             children: const [
-             ItemofallofferPage(),
+              ItemofallofferPage(),
               ItemofCardsPage(),
               ItemofShoppingPage(),
-             ItemoftravelPage(),
+              ItemoftravelPage(),
               ItemofDinningPage()
             ],
           ),

@@ -1,217 +1,231 @@
+// Copyright 2013 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// ignore_for_file: public_member_api_docs, avoid_print
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
+import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
 
 
-class SideBar extends StatefulWidget {
-  const SideBar({Key? key}) : super(key: key);
+class MyAppp extends StatefulWidget {
+  const MyAppp({super.key});
 
   @override
-  SideBarState createState() => SideBarState();
+  State<MyAppp> createState() => _MyApppState();
 }
 
-class SideBarState extends State<SideBar> {
-  final GlobalKey<SliderDrawerState> _sliderDrawerKey =
-      GlobalKey<SliderDrawerState>();
-  late String title;
+class _MyApppState extends State<MyAppp> {
+  final LocalAuthentication auth = LocalAuthentication();
+  _SupportState _supportState = _SupportState.unknown;
+  bool? _canCheckBiometrics;
+  List<BiometricType>? _availableBiometrics;
+  String _authorized = 'Not Authorized';
+  bool _isAuthenticating = false;
 
   @override
   void initState() {
-    title = "Home";
     super.initState();
+    auth.isDeviceSupported().then(
+          (bool isSupported) => setState(() => _supportState = isSupported
+              ? _SupportState.supported
+              : _SupportState.unsupported),
+        );
+  }
+
+  Future<void> _checkBiometrics() async {
+    late bool canCheckBiometrics;
+    try {
+      canCheckBiometrics = await auth.canCheckBiometrics;
+    } on PlatformException catch (e) {
+      canCheckBiometrics = false;
+      print(e);
+    }
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _canCheckBiometrics = canCheckBiometrics;
+    });
+  }
+
+  Future<void> _getAvailableBiometrics() async {
+    late List<BiometricType> availableBiometrics;
+    try {
+      availableBiometrics = await auth.getAvailableBiometrics();
+    } on PlatformException catch (e) {
+      availableBiometrics = <BiometricType>[];
+      print(e);
+    }
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _availableBiometrics = availableBiometrics;
+    });
+  }
+
+  Future<void> _authenticate() async {
+    bool authenticated = false;
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+      });
+      authenticated = await auth.authenticate(
+        localizedReason: 'Let OS determine authentication method',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+        ),
+      );
+      setState(() {
+        _isAuthenticating = false;
+      });
+    } on PlatformException catch (e) {
+      print(e);
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+      return;
+    }
+    if (!mounted) {
+      return;
+    }
+
+    setState(
+        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+  }
+
+  Future<void> _authenticateWithBiometrics() async {
+    bool authenticated = false;
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+      });
+      authenticated = await auth.authenticate(
+        localizedReason:
+            'Scan your fingerprint (or face or whatever) to authenticate',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          biometricOnly: true,
+        ),
+      );
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Authenticating';
+      });
+    } on PlatformException catch (e) {
+      print(e);
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+      return;
+    }
+    if (!mounted) {
+      return;
+    }
+
+    final String message = authenticated ? 'Authorized' : 'Not Authorized';
+    setState(() {
+      _authorized = message;
+    });
+  }
+
+  Future<void> _cancelAuthentication() async {
+    await auth.stopAuthentication();
+    setState(() => _isAuthenticating = false);
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'BalsamiqSans'),
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: SliderDrawer(
-            appBar: SliderAppBar(
-                appBarColor: Colors.white,
-                title: Text(title,
-                    style: const TextStyle(
-                        fontSize: 22, fontWeight: FontWeight.w700))),
-            key: _sliderDrawerKey,
-            sliderOpenSize: 179,
-            slider: _SliderView(
-              onItemClick: (title) {
-                _sliderDrawerKey.currentState!.closeSlider();
-                setState(() {
-                  this.title = title;
-                });
-              },
-            ),
-            child: _AuthorList()),
-      ),
-    );
-  }
-}
-
-class _SliderView extends StatelessWidget {
-  final Function(String)? onItemClick;
-
-  const _SliderView({Key? key, this.onItemClick}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.only(top: 30),
-      child: ListView(
-        children: <Widget>[
-          const SizedBox(
-            height: 30,
-          ),
-          CircleAvatar(
-            radius: 65,
-            backgroundColor: Colors.grey,
-            child: CircleAvatar(
-              radius: 60,
-              backgroundImage: Image.network(
-                      'https://nikhilvadoliya.github.io/assets/images/nikhil_1.webp')
-                  .image,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const Text(
-            'Nick',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 30,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ...[
-            Menu(Icons.home, 'Home'),
-            Menu(Icons.add_circle, 'Add Post'),
-            Menu(Icons.notifications_active, 'Notification'),
-            Menu(Icons.favorite, 'Likes'),
-            Menu(Icons.settings, 'Setting'),
-            Menu(Icons.arrow_back_ios, 'LogOut')
-          ]
-              .map((menu) => _SliderMenuItem(
-                  title: menu.title,
-                  iconData: menu.iconData,
-                  onTap: onItemClick))
-              .toList(),
-        ],
-      ),
-    );
-  }
-}
-
-class _SliderMenuItem extends StatelessWidget {
-  final String title;
-  final IconData iconData;
-  final Function(String)? onTap;
-
-  const _SliderMenuItem(
-      {Key? key,
-      required this.title,
-      required this.iconData,
-      required this.onTap})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-        title: Text(title,
-            style: const TextStyle(
-                color: Colors.black, fontFamily: 'BalsamiqSans_Regular')),
-        leading: Icon(iconData, color: Colors.black),
-        onTap: () => onTap?.call(title));
-  }
-}
-
-class _AuthorList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    List<Quotes> quotesList = [];
-    quotesList.add(Quotes(Colors.amber, 'Amelia Brown',
-        'Life would be a great deal easier if dead things had the decency to remain dead.'));
-    quotesList.add(Quotes(Colors.orange, 'Olivia Smith',
-        'That proves you are unusual," returned the Scarecrow'));
-    quotesList.add(Quotes(Colors.deepOrange, 'Sophia Jones',
-        'Her name badge read: Hello! My name is DIE, DEMIGOD SCUM!'));
-    quotesList.add(Quotes(Colors.red, 'Isabella Johnson',
-        'I am about as intimidating as a butterfly.'));
-    quotesList.add(Quotes(Colors.purple, 'Emily Taylor',
-        'Never ask an elf for help; they might decide your better off dead, eh?'));
-    quotesList
-        .add(Quotes(Colors.green, 'Maya Thomas', 'Act first, explain later'));
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: ListView.separated(
-          scrollDirection: Axis.vertical,
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          itemBuilder: (builder, index) {
-            return LimitedBox(
-              maxHeight: 150,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: quotesList[index].color,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10.0),
-                    )),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Text(
-                        quotesList[index].author,
-                        style: const TextStyle(
-                            fontFamily: 'BalsamiqSans_Blod',
-                            fontSize: 30,
-                            color: Colors.white),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        quotesList[index].quote,
-                        style: const TextStyle(
-                            fontFamily: 'BalsamiqSans_Regular',
-                            fontSize: 15,
-                            color: Colors.white),
-                      ),
-                    )
-                  ],
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
+        ),
+        body: ListView(
+          padding: const EdgeInsets.only(top: 30),
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                if (_supportState == _SupportState.unknown)
+                  const CircularProgressIndicator()
+                else if (_supportState == _SupportState.supported)
+                  const Text('This device is supported')
+                else
+                  const Text('This device is not supported'),
+                const Divider(height: 100),
+                Text('Can check biometrics: $_canCheckBiometrics\n'),
+                ElevatedButton(
+                  onPressed: _checkBiometrics,
+                  child: const Text('Check biometrics'),
                 ),
-              ),
-            );
-          },
-          separatorBuilder: (builder, index) {
-            return const Divider(
-              height: 10,
-              thickness: 0,
-            );
-          },
-          itemCount: quotesList.length),
+                const Divider(height: 100),
+                Text('Available biometrics: $_availableBiometrics\n'),
+                ElevatedButton(
+                  onPressed: _getAvailableBiometrics,
+                  child: const Text('Get available biometrics'),
+                ),
+                const Divider(height: 100),
+                Text('Current State: $_authorized\n'),
+                if (_isAuthenticating)
+                  ElevatedButton(
+                    onPressed: _cancelAuthentication,
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text('Cancel Authentication'),
+                        Icon(Icons.cancel),
+                      ],
+                    ),
+                  )
+                else
+                  Column(
+                    children: <Widget>[
+                      ElevatedButton(
+                        onPressed: _authenticate,
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Text('Authenticate'),
+                            Icon(Icons.perm_device_information),
+                          ],
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: _authenticateWithBiometrics,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Text(_isAuthenticating
+                                ? 'Cancel'
+                                : 'Authenticate: biometrics only'),
+                            const Icon(Icons.fingerprint),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-class Quotes {
-  final MaterialColor color;
-  final String author;
-  final String quote;
-
-  Quotes(this.color, this.author, this.quote);
-}
-
-class Menu {
-  final IconData iconData;
-  final String title;
-
-  Menu(this.iconData, this.title);
+enum _SupportState {
+  unknown,
+  supported,
+  unsupported,
 }
