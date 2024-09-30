@@ -2,10 +2,16 @@ import 'package:banking_app/common_widgets/common_image_carousel.dart';
 import 'package:banking_app/constant/color_theme.dart';
 import 'package:banking_app/constant/font_theme.dart';
 import 'package:banking_app/screens/Home/homescreen.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:banking_app/screens/Loans/loans.dart';
+import 'package:banking_app/screens/calculator/calculator.dart';
+import 'package:banking_app/screens/digital%20savings%20account/savings_account.dart';
+import 'package:banking_app/screens/refer%20a%20credit%20card/refer_a_credit_card.dart';
+import 'package:banking_app/screens/refer%20a%20friend/refer_a_friend.dart';
+// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -239,24 +245,53 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisExtent: 100,
                 ),
                 children: [
-                  customContainerView('assets/icons/savings.png',
-                      'Open Savings Account', () {}),
-                  customContainerView('assets/icons/offer1.png',
-                      'Apply For Credit Card', () {}),
                   customContainerView(
-                      'assets/icons/loan.png', 'Apply For Loan', () {}),
+                      'assets/icons/savings.png', 'Open Savings Account', () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const DigitalSavingsAccountPage()));
+                  }),
                   customContainerView(
-                      'assets/icons/calculator.png', 'Calculators', () {}),
+                      'assets/icons/offer1.png', 'Apply For Credit Card', () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const ReferACreditCardPage()));
+                  }),
+                  customContainerView('assets/icons/loan.png', 'Apply For Loan',
+                      () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoansPage()));
+                  }),
                   customContainerView(
-                      'assets/icons/share.png', 'Refer a Friend', () {}),
+                      'assets/icons/calculator.png', 'Calculators', () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CalculatorPage()));
+                  }),
                   customContainerView(
-                      'assets/icons/customer-support.png', 'Contact Us', () {}),
+                      'assets/icons/share.png', 'Refer a Friend', () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ReferAFriendpage()));
+                  }),
+                  customContainerView(
+                      'assets/icons/customer-support.png', 'Contact Us', () {
+                    _launchContactUs();
+                  }),
                 ],
               ),
             ),
             SizedBox(
               height: 5.h,
-            ),  
+            ),
             // Carousel Slider
             CommonImageCarousel(
               imageList: imageList,
@@ -305,5 +340,17 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  final Uri contactPhoneUri = Uri(
+    scheme: 'tel',
+    path: '18001080',
+  );
+
+// Function to launch phone dialer
+  Future<void> _launchContactUs() async {
+    if (!await launchUrl(contactPhoneUri)) {
+      throw Exception('Could not launch $contactPhoneUri');
+    }
   }
 }

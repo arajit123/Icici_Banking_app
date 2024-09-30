@@ -45,10 +45,21 @@ class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
         return AlertDialog(
           titlePadding: EdgeInsets.zero,
           // contentPadding: EdgeInsets.zero,
-          
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.r)
+          ),
           title: Container(
             padding: const EdgeInsets.all(8),
-            color: IciciBankTheme.accentColor,
+            decoration: BoxDecoration(
+              color: IciciBankTheme.accentColor,
+              borderRadius: BorderRadius.only(
+               
+              topLeft: Radius.circular(10.r),
+              topRight: Radius.circular(10.r)
+            
+              )
+            ),
+            
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -76,7 +87,7 @@ class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                    Text(
-                    'Your linked Credit cards related services are available in this section.',style: IciciBankFontTheme.textTheme.labelMedium!.copyWith(
+                    'Your linked Credit Cards related services are available in this section.',style: IciciBankFontTheme.textTheme.labelMedium!.copyWith(
                       color:IciciBankTheme.textColor
                     ),
                   ),

@@ -20,7 +20,8 @@ class MainContent extends StatefulWidget {
 class _MainContentState extends State<MainContent>
     with SingleTickerProviderStateMixin {
   bool _isBalanceChecked = false;
-  final _balance = "₹25,000";
+  bool isVerified = false;
+  final _balance = "₹25,000 ";
   Timer? _balanceTimer;
   late TabController _tabController;
   @override
@@ -40,10 +41,12 @@ class _MainContentState extends State<MainContent>
   void _showBalanceForLimitedTime() {
     setState(() {
       _isBalanceChecked = true;
+      // isVerified = true;
     });
-    _balanceTimer = Timer(const Duration(seconds: 5), () {
+    _balanceTimer = Timer(const Duration(seconds: 10), () {
       setState(() {
         _isBalanceChecked = false;
+        // isVerified = false;
       });
     });
   }
@@ -117,15 +120,15 @@ class _MainContentState extends State<MainContent>
                             child: GestureDetector(
                               onTap: _isBalanceChecked
                                   ? null
-                                  : () async {
-                                      bool isVerified = await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const PinVerificationPage()));
-                                      if (isVerified == true) {
+                                  : ()  {
+                                      // bool isVerified = await Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             const PinVerificationPage()));
+                                     
                                         _showBalanceForLimitedTime();
-                                      }
+                                      
                                     },
                               child: Text(
                                 _isBalanceChecked ? _balance : "Check Balance",
@@ -224,14 +227,16 @@ class _MainContentState extends State<MainContent>
                             children: [
                               Text(
                                 'Comprehensive Digital',
-                                style: IciciBankFontTheme.textTheme.headlineSmall!
+                                style: IciciBankFontTheme
+                                    .textTheme.headlineSmall!
                                     .copyWith(
                                         color: Colors.white,
                                         fontWeight: FontWeight.normal),
                               ),
                               Text(
                                 'Saving Account',
-                                style: IciciBankFontTheme.textTheme.headlineSmall!
+                                style: IciciBankFontTheme
+                                    .textTheme.headlineSmall!
                                     .copyWith(
                                         color: Colors.white,
                                         fontWeight: FontWeight.normal),
@@ -301,7 +306,7 @@ class _MainContentState extends State<MainContent>
           ),
           // SizedBox(height: 5.h,),
           Text(
-            'Last visited :03rd Sep 2024 , 15:29:34',
+            'Last visited :28th Sep 2024 , 15:29:34',
             style: IciciBankFontTheme.textTheme.displaySmall!
                 .copyWith(color: Colors.blueAccent),
           ),
